@@ -2,7 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:security="http://www.springframework.org/schema/security"
        xsi:schemaLocation="
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
                http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
@@ -11,6 +13,37 @@
     <context:component-scan base-package="com.PuosNaerhi.BusMan">
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="myAuthenticationProvider"/>
+    </security:authentication-manager>
+
+    <security:http use-expressions="true"  >
+        <security:csrf disabled="true" />
+        <security:intercept-url pattern="/"  access="permitAll"/>
+        <security:intercept-url pattern="/login"  access="permitAll"/>
+        <security:intercept-url pattern="/logout"  access="permitAll"/>
+
+        <security:intercept-url pattern="/create" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/update/**" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/delete/**" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/bus/**" access="isFullyAuthenticated()"/>
+
+        <security:form-login />
+        <security:logout logout-success-url="/home" />
+        <security:anonymous enabled="true" username="anonymous" granted-authority="ROLE_ANONYMOUS" />
+    </security:http>
+
+    <bean id="userService" class="com.PuosNaerhi.BusMan.domain.service.impl.UserServiceImpl" />
+
+    <bean id="bcryptencoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+    <bean id="myAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService" ref="userService" />
+        <property name="passwordEncoder" ref="bcryptencoder"/>
+    </bean>
+
+
 
 
     <bean id="application.properties" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">

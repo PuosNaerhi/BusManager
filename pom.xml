@@ -13,6 +13,7 @@
     <hibernate.validator>4.3.2.Final</hibernate.validator>
     <mysql.connector.version>5.1.21</mysql.connector.version>
     <spring.version>4.2.2.RELEASE</spring.version>
+    <spring.security.version>4.0.4.RELEASE</spring.security.version>
     <tomcat.version>7.0.47</tomcat.version>
     <junit.version>3.8.1</junit.version>
     <jackson.version>2.7.4</jackson.version>
@@ -74,6 +75,38 @@
       <artifactId>hibernate-validator</artifactId>
       <version>${hibernate.validator}</version>
     </dependency>
+
+    <!-- SPRING SECURITY -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+      <version>${spring.security.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-asm</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-taglibs</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+
+
+
     <!-- JUST FOR DEBUGGING AND BROWSING CODE -->
 
     <dependency>

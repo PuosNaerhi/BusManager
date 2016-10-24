@@ -4,13 +4,17 @@ import com.PuosNaerhi.BusMan.domain.entity.BusEntity;
 import com.PuosNaerhi.BusMan.domain.service.impl.BusPlaceFacade;
 import com.PuosNaerhi.BusMan.web.BusForm;
 import com.PuosNaerhi.BusMan.web.PlaceForm;
+import com.PuosNaerhi.BusMan.web.WwwUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.security.Principal;
 
 /**
  * Created by Perttu Vanharanta on 6.10.2016.
@@ -24,11 +28,16 @@ public class PlaceController {
 
 
     @RequestMapping(value = "/bus/{id}", method = RequestMethod.GET)
-    public String updateBusPlaceGet(@PathVariable("id") Integer id, Model model){
+    public String updateBusPlaceGet(@PathVariable("id") Integer id, Principal principal, Model model){
+        String name = null;
         BusEntity busEntity = busPlaceFacade.readBus(id);
         if(busEntity != null) {
             model.addAttribute("BusObject", busPlaceFacade.readBus(id));
             model.addAttribute("PlaceObjects", busPlaceFacade.listPlace(busEntity));
+            if(principal != null){
+                name = principal.getName();
+            }
+            model.addAttribute("Reserver", name);
             return "/bus";
         }else{
             return "redirect:/home";

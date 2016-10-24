@@ -74,7 +74,8 @@
         </tr>
     </c:forEach>
 </table>
-    Reserver name: <input type="text" name="reserver"/>
+    Reserver name: <input type="text" value="${Reserver}" disabled/>
+    <input type="hidden" name="reserver" value="${Reserver}"/>
     <br>
     <button type="submit">Reserve place</button>
 </form>
