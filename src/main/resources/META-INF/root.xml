@@ -28,6 +28,11 @@
         <security:intercept-url pattern="/update/**" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/delete/**" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/bus/**" access="isFullyAuthenticated()"/>
+        <security:intercept-url pattern="/userlist" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/userupdate/**" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/userdelete/**" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/userprofile/**" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/profile" access="isFullyAuthenticated()"/>
 
         <security:form-login />
         <security:logout logout-success-url="/home" />

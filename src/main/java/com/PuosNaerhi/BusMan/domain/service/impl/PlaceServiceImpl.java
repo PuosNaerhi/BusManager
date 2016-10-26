@@ -52,4 +52,10 @@ public class PlaceServiceImpl implements PlaceService{
     public List<PlaceEntity> listPlace(BusEntity busEntity) {
         return placeRepository.listPlace(busEntity);
     }
+
+    @Transactional(readOnly = true)
+    public List<PlaceEntity> listUserPlaces(String reservationMaker) {
+        return placeRepository.listUserPlaces(reservationMaker);
+    }
+
 }

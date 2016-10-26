@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page isELIgnored="false" %>
 <html>
 <head>
@@ -79,6 +80,19 @@
     <br>
     <button type="submit">Reserve place</button>
 </form>
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+<table>
+    <tr><td>Reservation maker</td><td>Place Number</td></tr>
+    <c:forEach items="${PlaceObjects}" var="PlaceObject">
+        <c:if test="${PlaceObject.reserved}">
+        <tr>
+            <td>${PlaceObject.reservationMaker}</td>
+            <td>${PlaceObject.placeNumber}</td>
+        </tr>
+        </c:if>
+    </c:forEach>
+</table>
+    </sec:authorize>
 </body>
 </html>
 

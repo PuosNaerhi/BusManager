@@ -34,6 +34,7 @@ public class PlaceController {
         if(busEntity != null) {
             model.addAttribute("BusObject", busPlaceFacade.readBus(id));
             model.addAttribute("PlaceObjects", busPlaceFacade.listPlace(busEntity));
+
             if(principal != null){
                 name = principal.getName();
             }

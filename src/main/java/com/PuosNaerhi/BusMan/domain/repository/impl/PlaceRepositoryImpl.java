@@ -52,6 +52,13 @@ public class PlaceRepositoryImpl implements PlaceRepository{
     }
 
 
+    public List<PlaceEntity> listUserPlaces(String reservationMaker) {
+        List<PlaceEntity> list = em.createQuery("FROM PlaceEntity place WHERE place.reservationMaker=:reservationMaker")
+                .setParameter("reservationMaker",reservationMaker)
+                .getResultList();
+        return list;
+    }
+
     private boolean checkIsIdExist(Integer id){
         List<PlaceEntity> list = em.createQuery("FROM PlaceEntity place WHERE place.id=:id")
                 .setParameter("id",id)

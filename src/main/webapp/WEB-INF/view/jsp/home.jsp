@@ -15,10 +15,7 @@
         <li><a href="<c:url value='/register' />">Register User</a></li>
 
     </sec:authorize>
-
-    <sec:authorize access="isFullyAuthenticated()">
-        <li><a href='<c:url value="/logout" />'>logout</a></li>
-
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
         <table>
             <tr><td>id</td><td>Start LocatioBusn</td><td>End Location</td><td>Size</td></tr>
             <c:forEach items="${BusObjects}" var="BusObject">
@@ -34,6 +31,26 @@
             </c:forEach>
         </table>
         <a href="<c:url value='/create' />">Create Bus</a>
+        <li><a href='<c:url value="/profile" />'>Profile</a></li>
+        <li><a href='<c:url value="/userlist" />'>User List</a></li>
+        <li><a href='<c:url value="/logout" />'>Logout</a></li>
+    </sec:authorize>
+    <sec:authorize access="hasRole('ROLE_USER')">
+        <table>
+            <tr><td>id</td><td>Start LocatioBusn</td><td>End Location</td><td>Size</td></tr>
+            <c:forEach items="${BusObjects}" var="BusObject">
+                <tr>
+                    <td>${BusObject.id}</td>
+                    <td>${BusObject.startLocation}</td>
+                    <td>${BusObject.endLocation}</td>
+                    <td>${BusObject.busSize}</td>
+                    <td><a href="<c:url value='/bus/${BusObject.id}' />">places</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+        <li><a href='<c:url value="/profile" />'>Profile</a></li>
+        <li><a href='<c:url value="/logout" />'>Log out</a></li>
+
 
     </sec:authorize>
 </ul>

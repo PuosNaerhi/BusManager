@@ -90,4 +90,8 @@ public class BusPlaceFacade {
         }
     }
 
+    public List<PlaceEntity> usersReserverPlaces(String reservationMaker){
+        return placeService.listUserPlaces(reservationMaker);
+    }
+
 }

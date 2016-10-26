@@ -51,6 +51,34 @@ public class UserServiceImpl implements UserService {
         return new WwwUser(u.getUsername(), u.getPassword(),u.getEmail(),u.getRole());
     }
 
+    @Transactional(readOnly = true)
+    public WwwUser getUserById(Integer id) {
+        UserEntity userEntity = userRepository.readUser(id);
+        if(userEntity != null) {
+            return new WwwUser(userEntity.getUsername(), userEntity.getPassword(), userEntity.getEmail(), userEntity.getRole());
+        }else{
+            return null;
+        }
+    }
+
+    @Transactional(readOnly = false)
+    public void updateUser(Integer id, String username, String email){
+        UserEntity userEntity = userRepository.readUser(id);
+        userEntity.setUsername(username);
+        userEntity.setEmail(email);
+        userRepository.updateUser(userEntity);
+    }
+
+    @Transactional(readOnly = false)
+    public void deleteUser(Integer id){
+        userRepository.deleteUser(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserEntity> getUserList(){
+        return userRepository.listUser();
+    }
+
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return getUser(username);
     }

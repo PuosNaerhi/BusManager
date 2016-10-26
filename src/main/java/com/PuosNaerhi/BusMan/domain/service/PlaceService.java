@@ -15,4 +15,5 @@ public interface PlaceService {
     public void updatePlace(Integer id, Integer placenumber, String reserver, boolean reserved);
     public void deletePlace(Integer id);
     public List<PlaceEntity> listPlace(BusEntity busEntity);
+    public List<PlaceEntity> listUserPlaces(String reservationMaker);
 }
