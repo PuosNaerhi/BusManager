@@ -2,6 +2,7 @@ package com.PuosNaerhi.BusMan.domain.service.impl;
 
 import com.PuosNaerhi.BusMan.domain.entity.BusEntity;
 import com.PuosNaerhi.BusMan.domain.entity.PlaceEntity;
+import com.PuosNaerhi.BusMan.domain.entity.UserEntity;
 import com.PuosNaerhi.BusMan.domain.repository.PlaceRepository;
 import com.PuosNaerhi.BusMan.domain.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,11 @@ public class PlaceServiceImpl implements PlaceService{
     PlaceRepository placeRepository;
 
     @Transactional(readOnly = false)
-    public void createPlace(BusEntity busEntity, Integer placenumber, String reserver, boolean reserved) {
+    public void createPlace(BusEntity busEntity, Integer placenumber, boolean reserved) {
         PlaceEntity placeEntity = new PlaceEntity();
         placeEntity.setBusEntity(busEntity);
         placeEntity.setPlaceNumber(placenumber);
-        placeEntity.setReservationMaker(reserver);
+        placeEntity.setUserEntity(null);
         placeEntity.setReserved(reserved);
         placeRepository.createPlace(placeEntity);
     }
@@ -35,10 +36,10 @@ public class PlaceServiceImpl implements PlaceService{
     }
 
     @Transactional(readOnly = false)
-    public void updatePlace(Integer id, Integer placenumber, String reserver, boolean reserved) {
+    public void updatePlace(Integer id, Integer placenumber, UserEntity userEntity, boolean reserved) {
         PlaceEntity placeEntity = placeRepository.readPlace(id);
         placeEntity.setPlaceNumber(placenumber);
-        placeEntity.setReservationMaker(reserver);
+        placeEntity.setUserEntity(userEntity);
         placeEntity.setReserved(reserved);
         placeRepository.updatePlace(placeEntity);
     }
@@ -54,8 +55,8 @@ public class PlaceServiceImpl implements PlaceService{
     }
 
     @Transactional(readOnly = true)
-    public List<PlaceEntity> listUserPlaces(String reservationMaker) {
-        return placeRepository.listUserPlaces(reservationMaker);
+    public List<PlaceEntity> listUserPlaces(UserEntity userEntity) {
+        return placeRepository.listUserPlaces(userEntity);
     }
 
 }

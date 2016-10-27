@@ -1,6 +1,8 @@
 package com.PuosNaerhi.BusMan.controller;
 
 import com.PuosNaerhi.BusMan.domain.entity.BusEntity;
+import com.PuosNaerhi.BusMan.domain.entity.UserEntity;
+import com.PuosNaerhi.BusMan.domain.service.UserService;
 import com.PuosNaerhi.BusMan.domain.service.impl.BusPlaceFacade;
 import com.PuosNaerhi.BusMan.web.BusForm;
 import com.PuosNaerhi.BusMan.web.PlaceForm;
@@ -22,6 +24,9 @@ import java.security.Principal;
 
 @Controller
 public class PlaceController {
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     BusPlaceFacade busPlaceFacade;
@@ -48,8 +53,16 @@ public class PlaceController {
 
     @RequestMapping(value = "/bus/{id}", method = RequestMethod.POST)
     public String updateBusPlacePost(@PathVariable("id") Integer id, @ModelAttribute("placeNumber") PlaceForm placeForm, Model model){
-        busPlaceFacade.updatePlaceReserve(id, placeForm.getPlaceId(), placeForm.getReserver());
+
+        UserEntity userEntity = userService.getUserEntity(placeForm.getReserver());
+        busPlaceFacade.updatePlaceReserve(id, placeForm.getPlaceId(), userEntity);
         return "redirect:/home";
+    }
+
+    @RequestMapping(value = "/unreserve/{id}", method = RequestMethod.GET)
+    public String unreservePlace(@PathVariable("id") Integer id, Model model){
+        busPlaceFacade.updateCancelPlaceReserve(id);
+        return "redirect:/profile";
     }
 
 }

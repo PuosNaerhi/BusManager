@@ -20,7 +20,9 @@ public class PlaceEntity {
 
     Integer placeNumber;
     boolean reserved = false;
-    String reservationMaker = "";
+
+    @ManyToOne
+    UserEntity userEntity;
 
     public Integer getId() {
         return id;
@@ -54,11 +56,11 @@ public class PlaceEntity {
         this.reserved = reserved;
     }
 
-    public String getReservationMaker() {
-        return reservationMaker;
+    public UserEntity getUserEntity() {
+        return userEntity;
     }
 
-    public void setReservationMaker(String reservationMaker) {
-        this.reservationMaker = reservationMaker;
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }

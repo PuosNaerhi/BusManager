@@ -2,6 +2,7 @@ package com.PuosNaerhi.BusMan.domain.repository.impl;
 
 import com.PuosNaerhi.BusMan.domain.entity.BusEntity;
 import com.PuosNaerhi.BusMan.domain.entity.PlaceEntity;
+import com.PuosNaerhi.BusMan.domain.entity.UserEntity;
 import com.PuosNaerhi.BusMan.domain.repository.PlaceRepository;
 import org.springframework.stereotype.Repository;
 
@@ -52,9 +53,9 @@ public class PlaceRepositoryImpl implements PlaceRepository{
     }
 
 
-    public List<PlaceEntity> listUserPlaces(String reservationMaker) {
-        List<PlaceEntity> list = em.createQuery("FROM PlaceEntity place WHERE place.reservationMaker=:reservationMaker")
-                .setParameter("reservationMaker",reservationMaker)
+    public List<PlaceEntity> listUserPlaces(UserEntity userEntity) {
+        List<PlaceEntity> list = em.createQuery("FROM PlaceEntity place WHERE place.userEntity=:userEntity")
+                .setParameter("userEntity",userEntity)
                 .getResultList();
         return list;
     }

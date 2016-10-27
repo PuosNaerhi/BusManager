@@ -47,7 +47,7 @@ public class AccountController {
         if(principal != null){
             name = principal.getName();
             model.addAttribute("UserProfile", userService.getUser(name));
-            model.addAttribute("ReservedPlaces", busPlaceFacade.usersReserverPlaces(name));
+            model.addAttribute("ReservedPlaces", busPlaceFacade.usersReserverPlaces(userService.getUserEntity(name)));
             return "/profile";
         } else {
             return "redirect:/home";
@@ -91,7 +91,7 @@ public class AccountController {
         WwwUser wwwUser = userService.getUserById(id);
         if(wwwUser != null){
             model.addAttribute("UserProfile", wwwUser);
-            model.addAttribute("ReservedPlaces", busPlaceFacade.usersReserverPlaces(wwwUser.getUsername()));
+            model.addAttribute("ReservedPlaces", busPlaceFacade.usersReserverPlaces(userService.getUserEntity(wwwUser.getUsername())));
             return "/profile";
         } else {
             return "redirect:/home";

@@ -7,6 +7,7 @@
     <title>Create Bus</title>
 </head>
 <body>
+<a href="<c:url value='/home' />">Back home</a>
 <form action="create" method="POST" enctype="application/x-www-form-urlencoded" >
     <table>
         <tr><td>Start Location</td><td><input type="text" name="startLocation" /></td></tr>

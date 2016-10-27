@@ -11,7 +11,7 @@
 
 <ul>
     <sec:authorize access="isAnonymous()">
-        <li><a href='<c:url value="/login" />'>login</a></li>
+        <li><a href='<c:url value="/login" />'>Login</a></li>
         <li><a href="<c:url value='/register' />">Register User</a></li>
 
     </sec:authorize>

@@ -7,6 +7,7 @@
     <title>Update Bus</title>
 </head>
 <body>
+<a href="<c:url value='/home' />">Back home</a>
 <form action='/update/${BusObject.id}' method="POST" enctype="application/x-www-form-urlencoded" >
     <table>
         <tr><td>Start Location</td><td><input type="text" name="startLocation" value="${BusObject.startLocation}"/></td></tr>

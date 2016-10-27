@@ -8,6 +8,7 @@
     <title>User List</title>
 </head>
 <body>
+<a href="<c:url value='/home' />">Back home</a>
 <table>
     <tr><td>Username</td><td>Email</td></tr>
     <c:forEach items="${Users}" var="User">

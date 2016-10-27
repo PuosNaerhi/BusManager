@@ -7,6 +7,7 @@
     <title>User update</title>
 </head>
 <body>
+<a href="<c:url value='/home' />">Back home</a>
 <form action='/userupdate/${UserId}' method="POST" enctype="application/x-www-form-urlencoded" >
     <table>
         <tr><td>Username</td><td><input type="text" name="username" value="${UserObject.username}"/></td></tr>

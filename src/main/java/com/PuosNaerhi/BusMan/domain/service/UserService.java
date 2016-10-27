@@ -16,6 +16,7 @@ public interface UserService extends UserDetailsService{
     public void createUser(WwwUser wwwUser);
     public WwwUser getUser(String username);
     public WwwUser getUserById(Integer id);
+    public UserEntity getUserEntity(String username);
     public void updateUser(Integer id, String username, String email);
     public void deleteUser(Integer id);
     public List<UserEntity> getUserList();

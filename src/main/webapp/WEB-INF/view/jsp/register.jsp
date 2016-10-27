@@ -6,6 +6,7 @@
 <%@ page isELIgnored="false" %>
 <html>
 <body>
+<a href="<c:url value='/home' />">Back home</a>
 <h2>Register User</h2>
 
 

@@ -2,6 +2,7 @@ package com.PuosNaerhi.BusMan.domain.service.impl;
 
 import com.PuosNaerhi.BusMan.domain.entity.BusEntity;
 import com.PuosNaerhi.BusMan.domain.entity.PlaceEntity;
+import com.PuosNaerhi.BusMan.domain.entity.UserEntity;
 import com.PuosNaerhi.BusMan.domain.service.BusService;
 import com.PuosNaerhi.BusMan.domain.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +26,17 @@ public class BusPlaceFacade {
 
     public void createBusPlace(String startLocation, String endLocation, Integer busSize){
         BusEntity busEntity;
-        String reserver = "";
         boolean reserved = false;
 
         busEntity = busService.createBus(startLocation, endLocation, busSize);
         for (int i = 1; i <= busSize; i++)
         {
-            placeService.createPlace(busEntity,i,reserver,reserved);
+            placeService.createPlace(busEntity,i, reserved);
         }
     }
 
     public void updateBusPlace(Integer id, String startLocation, String endLocation, Integer busSize){
         BusEntity busEntity = busService.readBus(id);
-        String reserver = "";
         boolean reserved = false;
 
         Integer oldBusSize = busEntity.getBusSize();
@@ -50,7 +49,7 @@ public class BusPlaceFacade {
                 }
             }else{
                 for(int i = oldBusSize+1; i <= busSize; i++){
-                    placeService.createPlace(busEntity,i,reserver,reserved);                }
+                    placeService.createPlace(busEntity,i,reserved);                }
             }
 
         }
@@ -80,18 +79,25 @@ public class BusPlaceFacade {
         return placeService.listPlace(busEntity);
     }
 
-    public void updatePlaceReserve(Integer id, Integer placeId, String reserver){
+    public void updatePlaceReserve(Integer id, Integer placeId, UserEntity userEntity){
         BusEntity busEntity = busService.readBus(id);
         if(busEntity!= null){
             PlaceEntity placeEntity = placeService.readPlace(placeId);
             if(placeEntity != null){
-                placeService.updatePlace(placeEntity.getId(),placeEntity.getPlaceNumber(),reserver,true);
+                placeService.updatePlace(placeEntity.getId(),placeEntity.getPlaceNumber(),userEntity, true);
             }
         }
     }
 
-    public List<PlaceEntity> usersReserverPlaces(String reservationMaker){
-        return placeService.listUserPlaces(reservationMaker);
+    public void updateCancelPlaceReserve(Integer id){
+        PlaceEntity placeEntity = placeService.readPlace(id);
+        if(placeEntity != null){
+            placeService.updatePlace(placeEntity.getId(),placeEntity.getPlaceNumber(),null,false);
+        }
+    }
+
+    public List<PlaceEntity> usersReserverPlaces(UserEntity userEntity){
+        return placeService.listUserPlaces(userEntity);
     }
 
 }

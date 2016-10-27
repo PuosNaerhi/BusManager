@@ -10,7 +10,7 @@
     <title>Bus Manager App</title>
 </head>
 <body>
-
+<a href="<c:url value='/home' />">Back home</a>
 <h1>Placenumber's</h1>
 <form action='/bus/${BusObject.id}' method="POST" enctype="application/x-www-form-urlencoded">
 <table>
@@ -86,7 +86,7 @@
     <c:forEach items="${PlaceObjects}" var="PlaceObject">
         <c:if test="${PlaceObject.reserved}">
         <tr>
-            <td>${PlaceObject.reservationMaker}</td>
+            <td>${PlaceObject.userEntity.username}</td>
             <td>${PlaceObject.placeNumber}</td>
         </tr>
         </c:if>

@@ -8,6 +8,7 @@
     <title>User Profile</title>
 </head>
 <body>
+<a href="<c:url value='/home' />">Back home</a>
     <h2>${UserProfile.username}</h2>
     <h2>${UserProfile.email}</h2>
 <table>
@@ -16,6 +17,7 @@
             <tr>
                 <td>${ReservedPlace.busEntity.id}</td>
                 <td>${ReservedPlace.placeNumber}</td>
+                <td><a href="<c:url value='/unreserve/${ReservedPlace.id}' />">Unreserve place</a></td>
             </tr>
         </c:forEach>
     </table>

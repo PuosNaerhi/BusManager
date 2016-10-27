@@ -61,6 +61,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Transactional(readOnly = true)
+    public UserEntity getUserEntity(String username){
+        return userRepository.getUser(username);
+    }
+
     @Transactional(readOnly = false)
     public void updateUser(Integer id, String username, String email){
         UserEntity userEntity = userRepository.readUser(id);

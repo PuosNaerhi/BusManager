@@ -2,6 +2,7 @@ package com.PuosNaerhi.BusMan.domain.repository;
 
 import com.PuosNaerhi.BusMan.domain.entity.BusEntity;
 import com.PuosNaerhi.BusMan.domain.entity.PlaceEntity;
+import com.PuosNaerhi.BusMan.domain.entity.UserEntity;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ public interface PlaceRepository {
     public void updatePlace(PlaceEntity placeEntity);
     public void deletePlace(Integer id);
     public List<PlaceEntity> listPlace(BusEntity busEntity);
-    public List<PlaceEntity> listUserPlaces(String reservationMaker);
+    public List<PlaceEntity> listUserPlaces(UserEntity userEntity);
 }
